@@ -117,18 +117,18 @@ function articleMaker (articleObj) {
   
   // Setting up the structure of the elements
   
-  article.appendChild('heading');
-  article.appendChild('date');
-  article.appendChild('paragraphOne');
-  article.appendChild('paragraphTwo');
-  article.appendChild('paragraphThree');
-  article.appendChild('button');
+  article.appendChild(heading);
+  article.appendChild(date);
+  article.appendChild(paragraphOne);
+  article.appendChild(paragraphTwo);
+  article.appendChild(paragraphThree);
+  article.appendChild(button);
  
   // Adding classes to elements that need them
   
   article.classList.add('article');
   date.classList.add('date');
-  button.classList.add('exppandButton');
+  button.classList.add('expandButton');
 
   // Adding text content to elements that need them
 
@@ -137,10 +137,15 @@ function articleMaker (articleObj) {
   paragraphOne.textContent = articleObj.firstParagraph;  
   paragraphTwo.textContent = articleObj.secondParagraph;
   paragraphThree.textContent = articleObj.thirdParagraph;
+  button.textContent = '+';
 
+  function readArticle () {
+    article.classList.toggle('article-open');
+  }
   
-  
+  button.addEventListener('click', readArticle);
 
+return article;
 }
 console.log(articleMaker(data[0]));
 
@@ -156,3 +161,14 @@ console.log(articleMaker(data[0]));
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+const articles = document.querySelector('.articles');
+
+const articleElements = data.map(articleObj => {
+  return articleMaker(articleObj);
+})
+
+articleElements.forEach(articleElem => {
+  articles.appendChild(articleElem);
+  console.log(articleElem);
+})
+
